@@ -1,0 +1,58 @@
+
+CREATE TABLE Cliente(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    nome VARCHAR(50) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    endereco VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE pedido(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    Cliente_id INT NOT NULL,
+    dataPedido DATE NOT NULL,
+    valorPedido DECIMAL(5, 2) NOT NULL,
+    PRIMARY KEY (id),
+    INDEX pedido_FKIndex1(Cliente_id)
+);
+
+CREATE TABLE itemPedido(
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    Pedido_id INT NOT NULL ,
+    Livro_id INT NOT NULL ,
+    quantidade INT NOT NULL,
+    valorPedido DECIMAL(5, 2) NOT NULL,
+    PRIMARY KEY (Pedido_id,Livro_id),
+    INDEX itemPedido_FKIndex1(Pedido_id),
+    INDEX itemPedido_FKIndex2(Livro_id)
+);
+
+
+CREATE TABLE livro(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    Editora_id INT NOT NULL,
+    titulo VARCHAR(100) NOT NULL,
+    autor VARCHAR(50) NOT NULL,
+    ano INT NOT NULL,
+    ISBN VARCHAR(20) NOT NULL,
+    preco DECIMAL(5, 2) NOT NULL,
+    PRIMARY KEY (id),
+    INDEX livro_FKIndex1(Editora_id)
+);
+
+
+CREATE TABLE editora(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    endereco VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)  
+);
+
+CREATE TABLE estoque(
+    livro_id INT NOT NULL,
+    quantidade INT UNSIGNED NOT NULL,
+    INDEX estoque_FKIndex1(livro_id)
+);
